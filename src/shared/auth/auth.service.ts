@@ -21,10 +21,10 @@ export class AuthService {
   async signIn(signInDto: SignInDto): Promise<any> {
     try {
       const userData = await this.usersService.findOne({
-        where: {
-          email: signInDto.email,
-        },
+        email: signInDto.email,
       });
+
+      console.log('user role associado', userData.role);
 
       if (!userData.id) {
         throw new HttpException(
@@ -63,6 +63,7 @@ export class AuthService {
         userId: userData.id,
         username: userData.username,
         email: userData.email,
+        role: userData.role,
       };
 
       return {
@@ -70,6 +71,7 @@ export class AuthService {
         userId: userData.id,
         username: userData.username,
         email: userData.email,
+        role: userData.role,
       };
     } catch (error: any) {
       console.log(

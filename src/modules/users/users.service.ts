@@ -283,58 +283,79 @@ export class UsersService {
     }
   }
 
-  async findOne(data: any) {
-    try {
-      const userFetched: User = await this.userRepo.findOne(data);
+async findOne(data: { email: string }) {
+  try {
+    const userFetched: User = await this.userRepo.findOne({
+      where: {
+        email: data.email,
+      },
+      relations: {
+        userRoles: {
+          role: true,
+        },
+      },
+    });
 
-      if (!userFetched.active) {
-        throw new HttpException(
-          {
-            statusCode: 404,
-            method: 'GET',
-            message: 'Usuário Desativado.',
-            path: '/users/user/id',
-            timestamp: Date.now(),
-          },
-          HttpStatus.NOT_FOUND,
-        );
-      }
+    console.log('user fetched', userFetched);
 
-      if (!userFetched)
-        throw new HttpException(
-          {
-            statusCode: 404,
-            method: 'GET',
-            message: 'Usuário não encontrado.',
-            path: '/users/user/id',
-            timestamp: Date.now(),
-          },
-          HttpStatus.NOT_FOUND,
-        );
-
-      return {
-        id: userFetched.id,
-        username: userFetched.username,
-        email: userFetched.email,
-        // role: userFetched.role,
-        password: userFetched.password,
-        // img: profileFetched.img,
-      };
-    } catch (error: any) {
+    if (!userFetched) {
       throw new HttpException(
         {
-          statusCode: 400,
-          method: 'POST',
-          message: error.message,
-          error: error.message,
-          link: error.link ?? '',
+          statusCode: 404,
+          method: 'GET',
+          message: 'Usuário não encontrado.',
           path: '/users/user/id',
           timestamp: Date.now(),
         },
-        HttpStatus.EXPECTATION_FAILED,
+        HttpStatus.NOT_FOUND,
       );
     }
+
+    if (!userFetched.active) {
+      throw new HttpException(
+        {
+          statusCode: 404,
+          method: 'GET',
+          message: 'Usuário Desativado.',
+          path: '/users/user/id',
+          timestamp: Date.now(),
+        },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    // Extrair os roleNames
+    const roles = userFetched.userRoles?.map(userRole => userRole.role?.roleName) || [];
+    const roleNames = roles.filter(role => role); // Remove null/undefined
+    const primaryRole = roleNames[0] || null; // Pega o primeiro role ou null
+
+    return {
+      id: userFetched.id,
+      username: userFetched.username,
+      email: userFetched.email,
+      password: userFetched.password,
+      roles: roleNames, // Array com todos os roles
+      role: primaryRole, // Role principal (primeiro)
+      firstname: userFetched.firstname,
+      lastname: userFetched.lastname,
+      isSuperAdmin: userFetched.isSuperAdmin,
+      active: userFetched.active,
+    };
+  } catch (error: any) {
+    throw new HttpException(
+      {
+        statusCode: 400,
+        method: 'POST',
+        message: error.message,
+        error: error.message,
+        link: error.link ?? '',
+        path: '/users/user/id',
+        timestamp: Date.now(),
+      },
+      HttpStatus.EXPECTATION_FAILED,
+    );
   }
+}
 
   async findOneAdmin(data: any) {
     try {
