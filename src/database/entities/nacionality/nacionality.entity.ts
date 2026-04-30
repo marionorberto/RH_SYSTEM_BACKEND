@@ -1,3 +1,4 @@
+// backend/src/database/entities/nacionality/nacionality.entity.ts
 import {
   Column,
   Entity,
@@ -13,7 +14,13 @@ export class Nacionality {
   @PrimaryGeneratedColumn('uuid', { name: 'id' })
   id: string;
 
-  @Column({ name: 'isocode', type: 'varchar', length: '10', nullable: false })
+  @Column({
+    name: 'isocode',
+    type: 'varchar',
+    length: '10',
+    nullable: false,
+    unique: true,
+  })
   isocode: string;
 
   @Column({
@@ -21,6 +28,7 @@ export class Nacionality {
     type: 'varchar',
     length: '255',
     nullable: false,
+    unique: true,
   })
   nomeNacionalidade: string;
 
@@ -30,6 +38,6 @@ export class Nacionality {
   @UpdateDateColumn({ name: 'atualizado_em', type: 'timestamp' })
   updatedAt: Date;
 
-  @OneToMany(() => Employee, (Employee) => Employee.nacionality)
+  @OneToMany(() => Employee, (employee) => employee.nacionality)
   employees: Employee[];
 }

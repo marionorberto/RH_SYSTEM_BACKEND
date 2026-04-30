@@ -14,6 +14,10 @@ import { FileUploadModule } from 'shared/file-upload/file-upload.module';
 import { FunctionModule } from '@modules/position/function.module';
 import { DepartamentModule } from '@modules/departament/departament.module';
 import { CompanyDataModule } from '@modules/company-data/company-data.module';
+import { NacionalityModule } from '@modules/nacionallity/nacionality.module';
+import { BankModule } from '@modules/bank/bank.module';
+import { IrtModule } from '@modules/irt/irt.module';
+import { FiscalYearModule } from '@modules/fiscal-year/fiscal-year.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -22,6 +26,9 @@ import { CompanyDataModule } from '@modules/company-data/company-data.module';
     }),
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule,
+    BankModule,
+    IrtModule,
+    FiscalYearModule,
     CompanyDataModule,
     DepartamentModule,
     FunctionModule,
@@ -30,6 +37,7 @@ import { CompanyDataModule } from '@modules/company-data/company-data.module';
     FileUploadModule,
     EmailModule,
     NotificationsModule,
+    NacionalityModule,
   ],
   controllers: [AppController],
   providers: [AppService],
