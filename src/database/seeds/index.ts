@@ -8,6 +8,8 @@ import { seedNacionalities } from './nacionallity.seed';
 import { seedIrt } from './irt.seed';
 import { seedBanks } from './bank.seed';
 import { seedFiscalYears } from './fiscal-year.seed';
+import { seedPermissions } from './permission.seed';
+import { seedRolePermissions } from './role-permission.seed';
 
 export async function runSeeds(dataSource: DataSource) {
   try {
@@ -19,6 +21,8 @@ export async function runSeeds(dataSource: DataSource) {
     await seedIrt(dataSource);
     await seedBanks(dataSource);
     await seedFiscalYears(dataSource);
+    await seedPermissions(dataSource);
+    await seedRolePermissions(dataSource);
     await seedUsers(dataSource);
     console.log('✅ All seeds completed successfully!');
   } catch (error) {

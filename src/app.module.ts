@@ -18,6 +18,8 @@ import { NacionalityModule } from '@modules/nacionallity/nacionality.module';
 import { BankModule } from '@modules/bank/bank.module';
 import { IrtModule } from '@modules/irt/irt.module';
 import { FiscalYearModule } from '@modules/fiscal-year/fiscal-year.module';
+import { PermissionModule } from '@modules/permission/permission.module';
+import { RolePermissionModule } from '@modules/role-permission/role-permission.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -38,6 +40,8 @@ import { FiscalYearModule } from '@modules/fiscal-year/fiscal-year.module';
     EmailModule,
     NotificationsModule,
     NacionalityModule,
+    PermissionModule,
+    RolePermissionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
