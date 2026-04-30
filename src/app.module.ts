@@ -13,6 +13,7 @@ import { UsersModule } from '@modules/users/users.module';
 import { FileUploadModule } from 'shared/file-upload/file-upload.module';
 import { FunctionModule } from '@modules/position/function.module';
 import { DepartamentModule } from '@modules/departament/departament.module';
+import { CompanyDataModule } from '@modules/company-data/company-data.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -21,13 +22,14 @@ import { DepartamentModule } from '@modules/departament/departament.module';
     }),
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule,
+    CompanyDataModule,
+    DepartamentModule,
+    FunctionModule,
     AuthModule,
     UsersModule,
+    FileUploadModule,
     EmailModule,
     NotificationsModule,
-    FileUploadModule,
-    FunctionModule,
-    DepartamentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

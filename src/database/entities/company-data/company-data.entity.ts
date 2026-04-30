@@ -1,3 +1,4 @@
+// backend/src/database/entities/company-data/company-data.entity.ts
 import {
   Column,
   Entity,
@@ -12,7 +13,7 @@ export class CompanyData {
   id: string;
 
   @Column({
-    name: 'nome_mpresa',
+    name: 'nome_empresa',
     type: 'varchar',
     length: '255',
     nullable: false,
