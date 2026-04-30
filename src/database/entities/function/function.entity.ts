@@ -1,3 +1,4 @@
+// backend/src/database/entities/function/function.entity.ts
 import {
   Column,
   Entity,
@@ -18,7 +19,7 @@ export class Function {
     type: 'varchar',
     length: '255',
     unique: true,
-    nullable: true,
+    nullable: false,
   })
   functionName: string;
 

@@ -11,6 +11,7 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
 import { EmailModule } from 'shared/email/email.module';
 import { UsersModule } from '@modules/users/users.module';
 import { FileUploadModule } from 'shared/file-upload/file-upload.module';
+import { FunctionModule } from '@modules/position/function.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -21,10 +22,10 @@ import { FileUploadModule } from 'shared/file-upload/file-upload.module';
     TypeOrmModule,
     AuthModule,
     UsersModule,
-    // NotificationsModule,
     EmailModule,
     NotificationsModule,
     FileUploadModule,
+    FunctionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
