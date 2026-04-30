@@ -19,6 +19,7 @@ import { Remuneration } from '../remuneration/remuneration.entity';
 import { Discount } from '../discount/discount.entity';
 import { Vacation } from '../vacation/vacation.entity';
 import { Point } from '../point/point.entity';
+import { Departament } from '../departament/departament.entity';
 
 export enum GeneroEnum {
   MASCULINO = 'MASCULINO',
@@ -217,6 +218,11 @@ export class Employee {
   })
   @JoinColumn({ name: 'id_Category' })
   category: Category;
+
+  @ManyToOne(() => Departament, (departament) => departament.employees, {
+    onDelete: 'CASCADE',
+  })
+  departament: Departament;
 
   @ManyToOne(() => Bank, (Bank) => Bank.employee, {
     onDelete: 'CASCADE',

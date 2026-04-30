@@ -12,6 +12,7 @@ import { EmailModule } from 'shared/email/email.module';
 import { UsersModule } from '@modules/users/users.module';
 import { FileUploadModule } from 'shared/file-upload/file-upload.module';
 import { FunctionModule } from '@modules/position/function.module';
+import { DepartamentModule } from '@modules/departament/departament.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -26,6 +27,7 @@ import { FunctionModule } from '@modules/position/function.module';
     NotificationsModule,
     FileUploadModule,
     FunctionModule,
+    DepartamentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
