@@ -306,7 +306,7 @@ export class RolePermissionService {
       );
 
       const saved = await this.rolePermissionRepository.save(newAssociations);
-
+      console.log(saved);
       return {
         statusCode: HttpStatus.OK,
         method: 'POST',
