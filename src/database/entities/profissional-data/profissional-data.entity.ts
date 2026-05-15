@@ -73,11 +73,11 @@ export class ProfissionalData {
   @JoinColumn({ name: 'id_tipos_contrato' })
   contractType: ContractType;
 
-  @ManyToOne(() => Employee, (employee) => employee.profissionalData, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'id_funcionario' })
-  employee: Employee;
+  // @ManyToOne(() => Employee, (employee) => employee.profissionalData, {
+  //   onDelete: 'CASCADE',
+  // })
+  // @JoinColumn({ name: 'id_funcionario' })
+  // employee: Employee;
 
   @ManyToOne(() => Duration, (duration) => duration.profissionalData, {
     onDelete: 'CASCADE',

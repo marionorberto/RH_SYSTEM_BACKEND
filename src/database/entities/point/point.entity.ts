@@ -62,9 +62,9 @@ export class Point {
   @CreateDateColumn({ name: 'criado_em', type: 'timestamp' })
   createdAt: Date;
 
-  @ManyToOne(() => Employee, (employee) => employee.points, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'id_funcionario' })
-  employee: Employee;
+  // @ManyToOne(() => Employee, (employee) => employee.points, {
+  //   onDelete: 'CASCADE',
+  // })
+  // @JoinColumn({ name: 'id_funcionario' })
+  // employee: Employee;
 }

@@ -70,11 +70,11 @@ export class Remuneration {
   @UpdateDateColumn({ name: 'atualizado_em', type: 'timestamp' })
   updatedAt: Date;
 
-  @ManyToOne(() => Employee, (Employee) => Employee.remunerations, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'id_Employee' })
-  employee: Employee;
+  // @ManyToOne(() => Employee, (Employee) => Employee.remunerations, {
+  //   onDelete: 'CASCADE',
+  // })
+  // @JoinColumn({ name: 'id_Employee' })
+  // employee: Employee;
 
   @ManyToOne(
     () => RemunerationType,

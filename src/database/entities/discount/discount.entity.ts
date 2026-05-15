@@ -7,7 +7,6 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Employee } from '../employee/employee.entity';
 import { DiscountType } from '../discount-type/discount-type.entity';
 
 export enum TipoDescontoEnum {
@@ -73,11 +72,11 @@ export class Discount {
   @UpdateDateColumn({ name: 'atualizado_em', type: 'timestamp' })
   updatedAt: Date;
 
-  @ManyToOne(() => Employee, (Employee) => Employee.discounts, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'id_Employee' })
-  employee: Employee;
+  // @ManyToOne(() => Employee, (Employee) => Employee.discounts, {
+  //   onDelete: 'CASCADE',
+  // })
+  // @JoinColumn({ name: 'id_Employee' })
+  // employee: Employee;
 
   @ManyToOne(() => DiscountType, (discountType) => discountType.discounts, {
     onDelete: 'CASCADE',

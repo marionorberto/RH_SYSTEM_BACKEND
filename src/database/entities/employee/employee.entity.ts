@@ -1,3 +1,4 @@
+// backend/src/database/entities/employee/employee.entity.ts
 import {
   Column,
   Entity,
@@ -6,7 +7,6 @@ import {
   CreateDateColumn,
   ManyToOne,
   OneToOne,
-  OneToMany,
   JoinColumn,
 } from 'typeorm';
 import { Nacionality } from '../nacionality/nacionality.entity';
@@ -14,11 +14,6 @@ import { Function } from '../function/function.entity';
 import { Category } from '../category/category.entity';
 import { Bank } from '../bank/bank.entity';
 import { User } from '../user/user.entity';
-import { ProfissionalData } from '../profissional-data/profissional-data.entity';
-import { Remuneration } from '../remuneration/remuneration.entity';
-import { Discount } from '../discount/discount.entity';
-import { Vacation } from '../vacation/vacation.entity';
-import { Point } from '../point/point.entity';
 import { Departament } from '../departament/departament.entity';
 
 export enum GeneroEnum {
@@ -74,6 +69,7 @@ export class Employee {
     name: 'genero',
     type: 'varchar',
     length: '10',
+    nullable: false,
   })
   gender: string;
 
@@ -86,7 +82,7 @@ export class Employee {
   civilState: string;
 
   @Column({ name: 'id_Nacionality', type: 'uuid', nullable: false })
-  idNacionality: number;
+  idNacionality: string;
 
   @Column({
     name: 'tipo_documento1',
@@ -163,14 +159,14 @@ export class Employee {
   @Column({ name: 'num_casa', type: 'varchar', length: '50', nullable: true })
   houseNumber: string;
 
-  @Column({ name: 'id_Function', type: 'int', nullable: true })
-  idFunction: number;
+  @Column({ name: 'id_Function', type: 'uuid', nullable: true })
+  idFunction: string;
 
-  @Column({ name: 'id_Category', type: 'int', nullable: true })
-  idCategory: number;
+  @Column({ name: 'id_Category', type: 'uuid', nullable: true })
+  idCategory: string;
 
-  @Column({ name: 'id_Bank', type: 'int', nullable: true })
-  idBank: number;
+  @Column({ name: 'id_Bank', type: 'uuid', nullable: true })
+  idBank: string;
 
   @Column({
     name: 'num_segsocial',
@@ -201,53 +197,26 @@ export class Employee {
   updatedAt: Date;
 
   // Relationships
-  @ManyToOne(() => Nacionality, (Nacionality) => Nacionality.employees, {
-    onDelete: 'CASCADE',
-  })
+  @ManyToOne(() => Nacionality, (nacionality) => nacionality.employees)
   @JoinColumn({ name: 'id_Nacionality' })
   nacionality: Nacionality;
 
-  @ManyToOne(() => Function, (Function) => Function.employees, {
-    onDelete: 'CASCADE',
-  })
+  @ManyToOne(() => Function, (func) => func.employees)
   @JoinColumn({ name: 'id_Function' })
   function: Function;
 
-  @ManyToOne(() => Category, (Category) => Category.employees, {
-    onDelete: 'CASCADE',
-  })
+  @ManyToOne(() => Category, (category) => category.employees)
   @JoinColumn({ name: 'id_Category' })
   category: Category;
 
-  @ManyToOne(() => Departament, (departament) => departament.employees, {
-    onDelete: 'CASCADE',
-  })
+  @ManyToOne(() => Departament, (departament) => departament.employees)
+  @JoinColumn({ name: 'id_Departament' })
   departament: Departament;
 
-  @ManyToOne(() => Bank, (Bank) => Bank.employee, {
-    onDelete: 'CASCADE',
-  })
+  @ManyToOne(() => Bank, (bank) => bank.employee)
   @JoinColumn({ name: 'id_Bank' })
   bank: Bank;
 
   @OneToOne(() => User, (user) => user.employee)
   user: User;
-
-  @OneToMany(
-    () => ProfissionalData,
-    (profissionalData) => profissionalData.employee,
-  )
-  profissionalData: ProfissionalData[];
-
-  @OneToMany(() => Remuneration, (Remuneration) => Remuneration.employee)
-  remunerations: Remuneration[];
-
-  @OneToMany(() => Discount, (discount) => discount.employee)
-  discounts: Discount[];
-
-  @OneToMany(() => Vacation, (vacation) => vacation.employee)
-  vacations: Vacation[];
-
-  @OneToMany(() => Point, (point) => point.employee)
-  points: Point[];
 }
