@@ -22,6 +22,8 @@ import { PermissionModule } from '@modules/permission/permission.module';
 import { RolePermissionModule } from '@modules/role-permission/role-permission.module';
 import { EmployeeModule } from '@modules/employee/employee.module';
 import { CategoryModule } from '@modules/category/category.module';
+import { AppSettingsModule } from '@modules/setting/app-setting/app-setting.module';
+import { UserSettingsModule } from '@modules/setting/user-setting/user-setting.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -46,6 +48,8 @@ import { CategoryModule } from '@modules/category/category.module';
     RolePermissionModule,
     EmployeeModule,
     CategoryModule,
+    AppSettingsModule,
+    UserSettingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

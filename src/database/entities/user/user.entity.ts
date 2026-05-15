@@ -15,6 +15,7 @@ import { Exclude } from 'class-transformer';
 import { Employee } from '../employee/employee.entity';
 import { UserRole } from '../user-role/user-role.entity';
 import { SystemLog } from '../system-log/system-log.entity';
+import { UserSettings } from '../settings/user-setting.entity';
 
 @Entity('users')
 export class User {
@@ -128,6 +129,10 @@ export class User {
 
   @OneToMany(() => SystemLog, (SystemLog) => SystemLog.user)
   systemLog: SystemLog[];
+
+  // Dentro da classe User, adicionar:
+  @OneToOne(() => UserSettings, (settings) => settings.user)
+  settings: UserSettings;
 
   @BeforeInsert()
   @BeforeUpdate()

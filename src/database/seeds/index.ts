@@ -11,12 +11,14 @@ import { seedFiscalYears } from './fiscal-year.seed';
 import { seedPermissions } from './permission.seed';
 import { seedRolePermissions } from './role-permission.seed';
 import { seedCategories } from './category.seed';
+import { seedAppSettings } from './app-setting.seed';
 
 export async function runSeeds(dataSource: DataSource) {
   try {
     console.log('🌱 Starting database seeds...');
     await seedFunctions(dataSource);
     await seedCategories(dataSource);
+    await seedAppSettings(dataSource);
     await seedDepartaments(dataSource);
     await seedCompanyData(dataSource);
     await seedNacionalities(dataSource);
